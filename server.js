@@ -34,7 +34,7 @@ app.listen(PORT, () => {
 })
 
 app.get("/", (req, res) => {
-  res.status(200).json({message: "test"})
+  res.status(200).json({message: "Welcome to the Url Shortener API - buycoins interview challenge", remoteGraphqlAPI: "https://bcurlshrt.herokuapp.com/graphql", localGraphQLAPI: "http://localhost:4000"})
 })
 
 const handleShortenedURL = require('./urlController');
