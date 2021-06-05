@@ -2,7 +2,7 @@
 require('dotenv').config({path: `${__dirname}/../.env`})
 
 const generateUniqueId = require('generate-unique-id');
-const baseURL = `${process.env.HOST}:${process.env.PORT || 4000}`;
+const baseURL = `${process.env.HOST}${process.env.IS_LOCAL == "true" ? ":"+ process.env.PORT || 4000 : ''}`;
 const {isValidURl} = require('../utils/validator');
 
 module.exports = {
