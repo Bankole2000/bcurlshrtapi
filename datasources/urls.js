@@ -34,6 +34,42 @@ class urlAPI extends DataSource{
       throw new Error("Couldn't store Url in database")
     }
   }
+  async getAllURLs(searchText){
+    let urls;
+    if(searchText){
+    urls = await prisma.url.findMany({
+      where: {
+        OR : [
+          {
+            originalUrl: {
+              contains: searchText,
+            },
+          },
+          {
+            shortenedId: {
+              contains: searchText,
+            },
+          },
+        ],
+      }
+    })
+    return urls
+    }
+    urls = await prisma.url.findMany();
+    return urls
+  }
+  async deleteURL(id){
+    try {
+      const urlToDelete = await prisma.url.delete({
+        where: {
+          id: Number(id)
+        }
+      })
+      return urlToDelete
+    } catch (err) {
+      console.log({err});
+    }
+  }
 }
 
 module.exports = urlAPI

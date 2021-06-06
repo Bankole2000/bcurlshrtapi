@@ -27,5 +27,9 @@ module.exports = {
         return `${baseURL}/${newlyStoredURL.shortenedId}`
       }
       return "Couldn't find or store URL"
+    },
+    shortenedURLs: async (parent, {searchText}, {dataSources}, info) => {
+      const urls = await dataSources.urlAPI.getAllURLs(searchText)
+      return urls
     }
 }

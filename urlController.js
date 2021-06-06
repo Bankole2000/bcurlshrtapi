@@ -10,6 +10,16 @@ module.exports = async(req, res) => {
       }
     })
     if(storedUrl){
+      await prisma.url.update({
+        where: {
+          id: storedUrl.id
+        }, 
+        data: {
+          clickCount: {
+            increment: 1
+          }
+        }
+      })
       res.redirect(storedUrl.originalUrl);
       return
     } else {
